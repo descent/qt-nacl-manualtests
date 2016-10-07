@@ -39,13 +39,42 @@
 ****************************************************************************/
 
 #include <QApplication>
+#include <QtGui>
+#include <QtWidgets>
 
 #include "analogclock.h"
 
+#if 0
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+}
+#endif
+
+void app_init(int argc, char **argv)
+{
+#if 0
+    window = new QWidget();
+    QLabel *label1 = new QLabel("Hello World");
+    QLabel *label2 = new QLabel("Bye World");
+    QLineEdit *lineEdit = new QLineEdit;
+    QPushButton *pushButton = new QPushButton("PuhsIt");
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(label1);
+    layout->addWidget(lineEdit);
+    layout->addWidget(pushButton);
+    layout->addWidget(label2);
+    window->setLayout(layout);
+    window->show();
+#endif
+    //QApplication app(argc, argv);
     AnalogClock clock;
     clock.show();
-    return app.exec();
+    //return app.exec();
 }
+
+void app_exit()
+{
+    //delete window;
+}
+
+Q_WIDGETS_MAIN(app_init, app_exit);
