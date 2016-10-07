@@ -44,23 +44,29 @@
 #include <QTreeView>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
+#include <QtGui>
+#include <QtWidgets>
 
-int main(int argc, char *argv[])
+void app_init(int argc, char **argv)
 {
     QApplication app(argc, argv);
 
     QCoreApplication::setApplicationVersion(QT_VERSION_STR);
     QCommandLineParser parser;
+    #if 0
     parser.setApplicationDescription("Qt Dir View Example");
     parser.addHelpOption();
     parser.addVersionOption();
     parser.addPositionalArgument("directory", "The directory to start in.");
     parser.process(app);
+
     const QString rootPath = parser.positionalArguments().isEmpty()
         ? QString() : parser.positionalArguments().first();
+    #endif
+    const QString rootPath = "/";
 
     QFileSystemModel model;
-    model.setRootPath("");
+    model.setRootPath("/");
     QTreeView tree;
     tree.setModel(&model);
     if (!rootPath.isEmpty()) {
@@ -80,5 +86,13 @@ int main(int argc, char *argv[])
     tree.setWindowTitle(QObject::tr("Dir View"));
     tree.show();
 
-    return app.exec();
+    //app.exec();
 }
+
+
+void app_exit()
+{
+    //delete window;
+}
+
+Q_WIDGETS_MAIN(app_init, app_exit);
